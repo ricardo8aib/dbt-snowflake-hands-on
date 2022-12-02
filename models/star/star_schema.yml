@@ -1,0 +1,141 @@
+version: 2
+
+models:
+    - name: fact_item_orders
+      description: "Item-orders fact table"
+      columns:
+          - name: item_order_key
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: product_id
+            description: "Products' ID"
+          - name: order_id
+            description: "ID of the order"
+          - name: seller_id
+            description: "ID of the seller"
+          - name: items_qty
+            description: "Quantity of items purchased"
+          - name: amount_paid
+            description: "Amount paid for the items purchased"
+          - name: total_freight_value
+            description: "Freight value of the items purchased"
+
+    - name: fact_orders
+      description: "Orders fact table"
+      columns:
+          - name: order_id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: status
+            description: "Status of the order"
+          - name: customer_id
+            description: "ID of the customer"
+          - name: purchase_date_id
+            description: "ID of the purchase date"
+          - name: approved_date_id
+            description: "ID of the approval date"
+          - name: delivered_carrier_date_id
+            description: "ID of the delivered-by-the-carrier date"
+          - name: delivered_customer_date_id
+            description: "ID of the delivered-to-the-customer date"
+          - name: estimated_delivery_date_id
+            description: "ID of the estimated delivery date"
+          - name: shipping_limit_date_id
+            description: "ID of the shipping limit date"
+          - name: amount_paid
+            description: "Amount paid for the order"
+    
+    - name: dim_customers
+      description: "Customers dimension"
+      columns:
+          - name: customer_id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: customer_city
+            description: "Customers' city"
+          - name: customer_state
+            description: "Customers' state"
+          - name: customer_zip_code_prefix
+            description: "Customers' zip code"
+
+    - name: dim_sellers
+      description: "Sellers dimension"
+      columns:
+          - name: seller_id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: seller_city
+            description: "Sellers' city"
+          - name: seller_state
+            description: "Sellers' state"
+          - name: seller_zip_code_prefix
+            description: "Sellers' zip code"
+
+    - name: dim_products
+      description: "Products dimension"
+      columns:
+          - name: product_id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: category_name
+            description: "Product's category name"
+          - name: weight_g
+            description: "Product's weight in grams"
+          - name: lenght_cm
+            description: "Product's length in cm"
+          - name: height_cm
+            description: "Product's height in cm"
+          - name: width_cm
+            description: "Product's width in cm"
+
+    - name: dim_date
+      description: "Date dimension"
+      columns:
+          - name: date_id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: date
+            description: "Timestamp for the date_id"
+          - name: day
+            description: "Date's day"
+          - name: month
+            description: "Date's month"
+          - name: year
+            description: "Date's yeat"
+          - name: day_of_week
+            description: "Date's day of week"
+          - name: day_of_month
+            description: "Date's day of month"
+          - name: quarter
+            description: "Date's quarter"
+
+    - name: dim_payments
+      description: "Paymets dimension"
+      columns:
+          - name: payment_id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: order_id
+            description: "ID of the order"
+          - name: payment_sequential
+            description: "Number of the payment for an order"
+          - name: payment_type
+            description: "Payment's type"
+          - name: payment_installments
+            description: "Total payments for the order"
+          - name: payment_value
+            description: "Paid value"

@@ -1,0 +1,113 @@
+version: 2
+
+models:
+    - name: stg_customers
+      description: "Customers data from datalake"
+      columns:
+          - name: customer_id
+            description: "The primary key for this table: id of the customers"
+            tests:
+                - unique
+                - not_null
+          - name: zip_code_prefix
+            description: "Customers' zip code prefix"
+
+    - name: stg_geolocation
+      description: "Geolocation data from datalake"
+      columns:
+          - name: zip_code_prefix
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: lat
+            description: "Zip code's latitude"
+          - name: lng
+            description: "Zip code's longitude"
+          - name: city
+            description: "Zip code's city"
+          - name: state
+            description: "Zip code's state"
+    
+    - name: stg_order_items
+      description: "Order-items data from datalake"
+      columns:
+          - name: order_id
+            description: "Order's id"
+          - name: product_id
+            description: "Product's id"
+          - name: seller_id
+            description: "Seller's id"
+          - name: unit_price
+            description: "Product's unit price for the order"
+          - name: freight_value
+            description: "Product's freight value for the order"
+          - name: quantity
+            description: "Quantity of products purchased in the order"
+
+    - name: stg_order_payments
+      description: "Order-payments data from datalake"
+      columns:
+          - name: payment_installments
+            description: "Total payments for the order"
+          - name: sequential
+            description: "Number of the payment for an order"
+          - name: type
+            description: "Payment's type"
+          - name: order_id
+            description: "ID of the order"
+          - name: value
+            description: "Paid value"
+
+    - name: stg_orders
+      description: "Orders data from datalake"
+      columns:
+          - name: order_id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: customer_id
+            description: "ID of the customer"
+          - name: status
+            description: "Order's current status"
+          - name: purchase_timestamp
+            description: "Order's purchase timestamp"
+          - name: approved_at
+            description: "Order's approval date"
+          - name: delivered_carrier_date
+            description: "Order's delivered carrier date"
+          - name: delivered_customer_date
+            description: "Order's delivered customer date"
+          - name: estimated_delivery_date
+            description: "Order's estimated delivered date"
+
+    - name: stg_products
+      description: "Products data from datalake"
+      columns:
+          - name: product_id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: weight_g
+            description: "Product's weight in grams"
+          - name: category_name
+            description: "Product's category name"
+          - name: length_cm
+            description: "Product's length in cm"
+          - name: height_cm
+            description: "Product's height in cm"
+          - name: width_cm
+            description: "Product's width in cm"
+
+    - name: stg_sellers
+      description: "Sellers data from datalake"
+      columns:
+          - name: seller_id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: zip_code_prefix
+            description: "sellers' zip code prefix"
