@@ -2,9 +2,9 @@
 
 SELECT
     distinct sellers.seller_id,
-    sellers.zip_code_prefix,
-    geolocation.city,
-    geolocation.state
+    sellers.seller_zip_code_prefix,
+    geolocation.geolocation_city,
+    geolocation.geolocation_state
 FROM {{ ref('stg_sellers') }} AS sellers
 left join {{ ref('stg_geolocation') }} as geolocation
-on sellers.zip_code_prefix = geolocation.zip_code_prefix
+on sellers.seller_zip_code_prefix = geolocation.geolocation_zip_code_prefix

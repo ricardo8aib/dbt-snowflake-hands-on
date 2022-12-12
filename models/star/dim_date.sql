@@ -1,11 +1,11 @@
 {{ config(materialized='table', sort='DATE', dist='auto') }}
 
 WITH dates AS (
-	SELECT purchase_timestamp AS DATE FROM {{ ref('stg_orders') }}
-	UNION SELECT approved_at FROM {{ ref('stg_orders') }}
-	UNION SELECT delivered_carrier_date FROM {{ ref('stg_orders') }}
-	UNION SELECT delivered_customer_date FROM {{ ref('stg_orders') }}
-	UNION SELECT estimated_delivery_date FROM {{ ref('stg_orders') }})
+	SELECT order_purchase_timestamp AS DATE FROM {{ ref('stg_orders') }}
+	UNION SELECT order_approved_at FROM {{ ref('stg_orders') }}
+	UNION SELECT order_delivered_carrier_date FROM {{ ref('stg_orders') }}
+	UNION SELECT order_delivered_customer_date FROM {{ ref('stg_orders') }}
+	UNION SELECT order_estimated_delivery_date FROM {{ ref('stg_orders') }})
 SELECT 
 	ROW_NUMBER() OVER(ORDER BY DATE ASC) AS date_id,
 	DATE,
